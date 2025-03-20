@@ -1,0 +1,77 @@
+{
+  "name": "rag-snippets-extension",
+  "displayName": "RAG Snippets Extension",
+  "description": "Add code files as symbolic links to a folder for RAG content generation",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/rag-snippets-extension"
+  },
+  "license": "MIT",
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "icon": "icon.png",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cursor-rules.toggleRagSnippet",
+        "title": "Add to RAG Snippets"
+      },
+      {
+        "command": "cursor-rules.listRagSnippets",
+        "title": "Manage RAG Snippets"
+      },
+      {
+        "command": "cursor-rules.linkMarkdownToProject",
+        "title": "Link RAG Markdown to Current Project"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "cursor-rules.toggleRagSnippet",
+          "when": "!ragSnippetExists",
+          "group": "ragSnippets"
+        },
+        {
+          "command": "cursor-rules.toggleRagSnippet",
+          "when": "ragSnippetExists",
+          "title": "Remove from RAG Snippets",
+          "group": "ragSnippets"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "cursor-rules.listRagSnippets"
+        },
+        {
+          "command": "cursor-rules.linkMarkdownToProject"
+        },
+        {
+          "command": "cursor-rules.toggleRagSnippet",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js",
+    "build:vsix": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.50.0",
+    "typescript": "^5.x"
+  }
+}
