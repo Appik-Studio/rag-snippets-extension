@@ -560,3 +560,5 @@ Temporary Items
 
 .idea
 *.vsix
+build
+.gradle

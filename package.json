@@ -67,7 +67,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js",
-    "build:vsix": "vsce package --allow-missing-repository"
+    "build:vsix": "vsce package --allow-missing-repository",
+    "build:jetbrains": "./gradlew clean buildPlugin"
   },
   "devDependencies": {
     "@types/node": "^20.x",

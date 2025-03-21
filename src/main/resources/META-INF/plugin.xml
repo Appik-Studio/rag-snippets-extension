@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin>
+    <id>com.cursor.ragsnippets</id>
+    <name>RAG Snippets</name>
+    <vendor email="support@cursor.sh" url="https://cursor.sh">Cursor</vendor>
+
+    <description><![CDATA[
+    A JetBrains IDE plugin that creates symbolic links to code files in a dedicated folder (`~/rag-snippet`)
+    and automatically generates a markdown document containing the content of these files for use with
+    Retrieval-Augmented Generation (RAG) systems.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <notificationGroup id="RAG Snippets Notifications"
+                          displayType="BALLOON"
+                          key="ragsnippets.notifications"/>
+    </extensions>
+
+    <actions>
+        <!-- Add to RAG Snippets action -->
+        <action id="RagSnippets.AddToRag"
+                class="com.cursor.ragsnippets.actions.AddToRagAction"
+                text="Add to RAG Snippets"
+                description="Add this file to RAG Snippets">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+            <add-to-group group-id="ConsoleEditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="Vcs.FileHistory.ContextMenu" anchor="last"/>
+        </action>
+
+        <!-- Remove from RAG Snippets action -->
+        <action id="RagSnippets.RemoveFromRag"
+                class="com.cursor.ragsnippets.actions.RemoveFromRagAction"
+                text="Remove from RAG Snippets"
+                description="Remove this file from RAG Snippets">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="RagSnippets.AddToRag"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="RagSnippets.AddToRag"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="after" relative-to-action="RagSnippets.AddToRag"/>
+            <add-to-group group-id="ConsoleEditorPopupMenu" anchor="after" relative-to-action="RagSnippets.AddToRag"/>
+            <add-to-group group-id="Vcs.FileHistory.ContextMenu" anchor="after" relative-to-action="RagSnippets.AddToRag"/>
+        </action>
+
+        <!-- Manage RAG Snippets action -->
+        <action id="RagSnippets.ManageSnippets"
+                class="com.cursor.ragsnippets.actions.ManageSnippetsAction"
+                text="Manage RAG Snippets"
+                description="Manage your RAG Snippets">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+        <!-- Link Markdown to Project action -->
+        <action id="RagSnippets.LinkMarkdownToProject"
+                class="com.cursor.ragsnippets.actions.LinkMarkdownAction"
+                text="Link RAG Markdown to Current Project"
+                description="Link the RAG markdown file to your current project">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
